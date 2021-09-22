@@ -1,7 +1,7 @@
 import c4d
 import os
 PLUGIN_ID = 1038428
-VERSION = 1.3
+VERSION = 1.4
 
 
 class Modeling(object):
@@ -40,7 +40,7 @@ class Modeling(object):
     @staticmethod
     def GetPointsGlobal(obj):
         all_points_pos = obj.GetAllPoints()
-        for i in xrange(len(all_points_pos)):
+        for i in range(len(all_points_pos)):
             all_points_pos[i] = Modeling.LocalToGlobal(obj, all_points_pos[i])
         return all_points_pos
 
@@ -73,7 +73,7 @@ class Modeling(object):
         local_tangent_list = list()
 
         # Global to Local tangent
-        for i in xrange(pt_count):
+        for i in range(pt_count):
             vl_local = Modeling.GlobalToLocal(obj, global_tangent_list[i]["vl"]) - pts[i]
             vr_local = Modeling.GlobalToLocal(obj, global_tangent_list[i]["vr"]) - pts[i]
             local_tangent_list.append([vl_local, vr_local])
@@ -124,7 +124,7 @@ class Modeling(object):
         if old_tangent:
             Modeling.SetTangentGlobal(obj, old_tangent)
 
-        for child_index in xrange(len(all_children)):
+        for child_index in range(len(all_children)):
             child = all_children[child_index]
             buffer_child = buffer_data[child_index]
             child.SetMg(buffer_child)
@@ -194,7 +194,7 @@ class UILauncher_Main(c4d.plugins.CommandData):
                 all_pos = list()
 
                 #Get the bottom of all
-                for i in xrange(len(all_obj_under)):
+                for i in range(len(all_obj_under)):
                     mat = all_obj_under[i].GetMg()
                     all_pos.append(mat.off)
                     buffer_bottom = mat.off.y
@@ -244,7 +244,7 @@ class UILauncher_Main(c4d.plugins.CommandData):
             return False
 
     def set_list_of_matrice(self, obj_under, new_matrice, doc):
-        for i in xrange(len(obj_under)):
+        for i in range(len(obj_under)):
             doc.AddUndo(c4d.UNDOTYPE_CHANGE, obj_under[i])
             obj_under[i].SetMg(new_matrice[i])
             obj_under[i].Message(c4d.MSG_UPDATE)
